@@ -14,6 +14,8 @@ var target_position: Vector2
 var mode: SimMode = SimMode.KINETIC
 
 # ToDo ORCA nefunguje
+#ToDo zapocitavat u Kinetic jen sousedy - dokoncit prechod na nav agenty
+
 
 func _ready() -> void:
 	add_to_group("sim_agents")
@@ -114,6 +116,9 @@ func calculate_kinetic_velocity(preferred_velocity: Vector2, forward_direction: 
 		var to_other = other_agent.global_position - global_position
 		var distance = to_other.length()
 		var min_dist = radius + other_agent.radius
+
+		# ToDo volba skupin 1 + 2 nebo jina separace 1 vs 2 skupina
+		# ToDo promena pro drift doprava dle promene
 		
 		# 1. STEJNÁ SKUPINA: pouze jemná separace, když se dotýkají
 		if other_agent.group_id == self.group_id:
@@ -125,6 +130,7 @@ func calculate_kinetic_velocity(preferred_velocity: Vector2, forward_direction: 
 		
 		# 2. PROTIJDOUNCÍ AGENTI (Protisměr)
 		# Detekční zóna: sledujeme protijdoucí agenty v dosahu 2x součtu poloměrů
+		#promena pro vzdalenost nebo navazat na hustotu Bacik a nebo fixne dle Wang
 		if distance > 0.001 and distance < (min_dist * 2.0):
 			# Zkontrolujeme, zda jde skutečně proti nám (skalární součin směrů < 0) nebo je před námi
 			var is_ahead = to_other.dot(forward_direction) > -radius * 0.5
@@ -141,6 +147,7 @@ func calculate_kinetic_velocity(preferred_velocity: Vector2, forward_direction: 
 				var gx = G_x(lateral_offset, sigma)
 				
 				# Síla laterálního driftu musí být výrazná, aby pruhy spolehlivě vznikly
+				#ToDo export promena?
 				lateral_drift_force += lateral_unit * gx * (speed * 2.2)
 
 	# Výsledná rychlost kombinuje dopředný tah, separaci a boční drift
