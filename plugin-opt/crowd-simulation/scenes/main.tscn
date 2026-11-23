@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://dg3hp54s68g2n"]
+
+[ext_resource type="Script" uid="uid://hwap2cqeioel" path="res://addons/lane-crowd/direction_2D.gd" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://78mosqypyptj" path="res://addons/lane-crowd/individual_agent_2D.gd" id="2_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://bbyxms5c8exu1" path="res://icon.svg" id="2_sugp2"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_sgp6g"]
+vertices = PackedVector2Array(1142, 9, 1142, 637, 585.7422, 294, 571.71094, 241.61719, 571.71094, 346.3828, 533.3828, 384.71094, 10, 637, 481, 398.7422, 428.6172, 384.71094, 10, 9, 390.28906, 346.3828, 376.2578, 294, 390.28906, 241.61719, 428.6172, 203.28906, 481, 189.25781, 533.3828, 203.28906)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(5, 4, 1), PackedInt32Array(5, 1, 6, 7), PackedInt32Array(8, 7, 6), PackedInt32Array(8, 6, 9, 10), PackedInt32Array(11, 10, 9), PackedInt32Array(12, 11, 9), PackedInt32Array(13, 12, 9), PackedInt32Array(13, 9, 0, 14), PackedInt32Array(15, 14, 0), PackedInt32Array(15, 0, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, -1, 0, 647, 1152, 647, 1152, -1)])
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jyhfs"]
+radius = 12.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sugp2"]
+size = Vector2(234, 556)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sugp2"]
+radius = 94.39
+
+[node name="Node2D" type="Node2D" unique_id=1728289093]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1385662900]
+position = Vector2(-20, -45)
+navigation_polygon = SubResource("NavigationPolygon_sgp6g")
+
+[node name="Direction_left" type="Node2D" parent="NavigationRegion2D" unique_id=24070698 node_paths=PackedStringArray("start")]
+position = Vector2(3, 330)
+script = ExtResource("1_0wfyh")
+mode = 1
+target_line = NodePath("Line2D")
+start = NodePath("Area2D")
+repeat_times = 100
+metadata/_custom_type_script = "uid://hwap2cqeioel"
+
+[node name="IndividualAgent2D" type="CharacterBody2D" parent="NavigationRegion2D/Direction_left" unique_id=1748128174]
+position = Vector2(54, -241)
+input_pickable = true
+platform_floor_layers = 4294967292
+script = ExtResource("2_jyhfs")
+radius = 13.0
+metadata/_custom_type_script = "uid://78mosqypyptj"
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/Direction_left/IndividualAgent2D" unique_id=12157958]
+position = Vector2(-4, -14)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_sugp2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Direction_left/IndividualAgent2D" unique_id=4883789]
+position = Vector2(-2, -16)
+shape = SubResource("CircleShape2D_jyhfs")
+
+[node name="Line2D" type="Line2D" parent="NavigationRegion2D/Direction_left" unique_id=188087424]
+position = Vector2(1133, -198)
+scale = Vector2(1, 3.4800005)
+points = PackedVector2Array(-18, 137.93102, -14, -14.367815)
+
+[node name="Area2D" type="Area2D" parent="NavigationRegion2D/Direction_left" unique_id=1311149185]
+position = Vector2(-945, 0)
+scale = Vector2(4.2800007, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Direction_left/Area2D" unique_id=1958519331]
+position = Vector2(109, -17)
+shape = SubResource("RectangleShape2D_sugp2")
+
+[node name="Direction_right" type="Node2D" parent="NavigationRegion2D" unique_id=773165536 node_paths=PackedStringArray("start")]
+modulate = Color(1, 0.105882354, 1, 1)
+position = Vector2(1147, 347)
+script = ExtResource("1_0wfyh")
+mode = 1
+target_line = NodePath("Line2D")
+group_id = 1
+start = NodePath("Area2D")
+repeat_times = 100
+metadata/_custom_type_script = "uid://hwap2cqeioel"
+
+[node name="IndividualAgent2D" type="CharacterBody2D" parent="NavigationRegion2D/Direction_right" unique_id=632308634]
+position = Vector2(54, -241)
+rotation = -3.1444478
+input_pickable = true
+platform_floor_layers = 4294967292
+script = ExtResource("2_jyhfs")
+metadata/_custom_type_script = "uid://78mosqypyptj"
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/Direction_right/IndividualAgent2D" unique_id=235433411]
+modulate = Color(0.8111974, 0.5841325, 0.04812, 1)
+position = Vector2(-4, -14)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_sugp2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Direction_right/IndividualAgent2D" unique_id=273237998]
+position = Vector2(-3.9628668, -13.011368)
+shape = SubResource("CircleShape2D_jyhfs")
+
+[node name="Line2D" type="Line2D" parent="NavigationRegion2D/Direction_right" unique_id=1177998211]
+position = Vector2(-1127, 184)
+rotation = -3.1444478
+scale = Vector2(1, 3.4800005)
+points = PackedVector2Array(-18, 137.93102, -14, -14.367815)
+
+[node name="Area2D" type="Area2D" parent="NavigationRegion2D/Direction_right" unique_id=340904062]
+position = Vector2(1012.0001, 20.000002)
+rotation = -3.1444478
+scale = Vector2(4.2386208, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Direction_right/Area2D" unique_id=2110926598]
+position = Vector2(134.91948, 28.38535)
+shape = SubResource("RectangleShape2D_sugp2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D" unique_id=439343214]
+position = Vector2(481, 294)
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/StaticBody2D" unique_id=1483097315]
+texture = ExtResource("2_sugp2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D" unique_id=248964433]
+shape = SubResource("CircleShape2D_sugp2")

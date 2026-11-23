@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://dg3hp54s68g2n"]
+
+[ext_resource type="Script" uid="uid://hwap2cqeioel" path="res://addons/lane-crowd/direction_2D.gd" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://78mosqypyptj" path="res://addons/lane-crowd/individual_agent_2D.gd" id="2_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://bbyxms5c8exu1" path="res://icon.svg" id="2_sugp2"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_sgp6g"]
+vertices = PackedVector2Array(1142, 637, 10, 637, 10, 9, 1142, 9)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, -1, 0, 647, 1152, 647, 1152, -1)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sugp2"]
+size = Vector2(234, 556)
+
+[node name="Node2D" type="Node2D" unique_id=1728289093]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1385662900]
+visible = false
+position = Vector2(0, 1)
+navigation_polygon = SubResource("NavigationPolygon_sgp6g")
+
+[node name="Direction_left" type="Node2D" parent="." unique_id=24070698 node_paths=PackedStringArray("start")]
+position = Vector2(3, 331)
+script = ExtResource("1_0wfyh")
+mode = 0
+repeat = true
+repeat_times = 200
+start = NodePath("Area2D")
+target_line = NodePath("Line2D")
+metadata/_custom_type_script = "uid://hwap2cqeioel"
+
+[node name="IndividualAgent2D" type="Area2D" parent="Direction_left" unique_id=1853669445]
+position = Vector2(54, -241)
+script = ExtResource("2_jyhfs")
+metadata/_custom_type_script = "uid://78mosqypyptj"
+
+[node name="Sprite2D" type="Sprite2D" parent="Direction_left/IndividualAgent2D" unique_id=12157958]
+position = Vector2(-4, -14)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_sugp2")
+
+[node name="Line2D" type="Line2D" parent="Direction_left" unique_id=188087424]
+position = Vector2(1133, -198)
+scale = Vector2(1, 3.4800005)
+points = PackedVector2Array(-18, 137.93102, -14, -14.367815)
+
+[node name="Area2D" type="Area2D" parent="Direction_left" unique_id=1311149185]
+position = Vector2(-945, 0)
+scale = Vector2(4.2800007, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction_left/Area2D" unique_id=1958519331]
+position = Vector2(109, -17)
+shape = SubResource("RectangleShape2D_sugp2")
+
+[node name="Direction_right" type="Node2D" parent="." unique_id=773165536 node_paths=PackedStringArray("start")]
+modulate = Color(1, 0.105882354, 1, 1)
+position = Vector2(1147, 348)
+script = ExtResource("1_0wfyh")
+mode = 0
+repeat = true
+repeat_times = 200
+start = NodePath("Area2D")
+target_line = NodePath("Line2D")
+group_id = 1
+metadata/_custom_type_script = "uid://hwap2cqeioel"
+
+[node name="IndividualAgent2D" type="Area2D" parent="Direction_right" unique_id=1085324689]
+position = Vector2(54, -241)
+rotation = -3.1444478
+script = ExtResource("2_jyhfs")
+metadata/_custom_type_script = "uid://78mosqypyptj"
+
+[node name="Sprite2D" type="Sprite2D" parent="Direction_right/IndividualAgent2D" unique_id=235433411]
+modulate = Color(0.8111974, 0.5841325, 0.04812, 1)
+position = Vector2(-4, -14)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_sugp2")
+
+[node name="Line2D" type="Line2D" parent="Direction_right" unique_id=1177998211]
+position = Vector2(-1127, 184)
+rotation = -3.1444478
+scale = Vector2(1, 3.4800005)
+points = PackedVector2Array(-18, 137.93102, -14, -14.367815)
+
+[node name="Area2D" type="Area2D" parent="Direction_right" unique_id=340904062]
+position = Vector2(1012.0001, 20.000002)
+rotation = -3.1444478
+scale = Vector2(4.2386208, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction_right/Area2D" unique_id=2110926598]
+position = Vector2(134.91948, 28.38535)
+shape = SubResource("RectangleShape2D_sugp2")
